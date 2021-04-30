@@ -19,25 +19,28 @@ const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
     }
 
     return (
-        <div class = "card-wrapper mr-5">
+        <div className = "card-wrapper mr-5">
             {/* <div class = "card-top" style={{"background-color": "black"}}></div> */}
-            <div class = "task-holder">
-                <span class = "card-header" 
-                style={{"background-color": "white", "border-radius": "10px", 
+            <div className = "task-holder">
+                <span className = "card-header" 
+                style={{"backgroundColor": "white", "borderRadius": "10px", 
                 "border":"1px solid black"}}
                 >{taskObj.Name}</span>
                 <p className = "mt-3">{taskObj.Description}</p>
 
                 <div style={{"position": "absolute", "right" : "20px", "top" : "20px"}}>
                     {/* <i className = "far fa-edit mr-3" style={{"color" : "black", "cursor" : "pointer"}} ></i> */}
-                    <i className="fas fa-trash-alt" style = {{"color" : "black", "cursor" : "pointer"}} onClick={handleDelete} ></i>
+                    <i className="fas fa-trash-alt text-white" style = {{"color" : "black", "cursor" : "pointer"}} onClick={handleDelete} ></i>
                 </div>
+
+                {/* <div style={{"position": "absolute", "right" : "20%","bottom" : "20px"}}>
+                <input type="checkbox" style={{"fontSize":"5rem"}}/>
+                </div> */}
 
                 <div style={{"position": "absolute", "right" : "20px", "bottom" : "20px"}}>
                     {/* <i className = "far fa-edit mr-3" style={{"color" : "black", "cursor" : "pointer"}} ></i> */}
                     {/* <i className="fas fa-trash-alt" style = {{"color" : "black", "cursor" : "pointer"}} ></i> */}
-                    <button type="button" class="btn btn-outline-dark btn-sm" 
-                    style = {{"color" : "black", "cursor" : "pointer"}} 
+                    <button type="button" className="btn btn-outline-light btn-sm" 
                     onClick={() => setModal(!modal)}>Edit</button>
                 </div>
         </div>

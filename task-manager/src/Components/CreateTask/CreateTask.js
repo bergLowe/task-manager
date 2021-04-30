@@ -33,14 +33,14 @@ const CreateTask = ({modal,toggle,task}) => {
                         <label htmlFor="tname">Task Name</label>
                         <input type="text" id="tname" className="form-control" 
                         name="taskName"
-                        value={newTask}
+                        // value={newTask}
                         onChange={getValue}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="desc">Task Description</label>
                         <textarea id="desc" rows="5" className="form-control"
                          name="description"
-                        value={newDesc}
+                        // value={newDesc}
                         onChange={getValue}></textarea>
                     </div>
                 </form>

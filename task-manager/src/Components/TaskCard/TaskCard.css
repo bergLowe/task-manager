@@ -1,0 +1,12 @@
+.btn btn-outline-light btn-sm {
+  color: white;
+  cursor: pointer;
+}
+
+.btn btn-outline-light btn-sm:hover {
+  color: black;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5);
+}

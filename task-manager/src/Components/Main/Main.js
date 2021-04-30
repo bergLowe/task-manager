@@ -1,6 +1,5 @@
 import React from 'react';
 import './Main.css';
-import axios from 'axios';
 import {useState, useEffect} from 'react';
 import CreateTask from '../CreateTask/CreateTask';
 import TaskCard from '../TaskCard/TaskCard';
@@ -39,19 +38,6 @@ const Main = () => {
     useEffect(() => {
         let taskList = localStorage.getItem("taskCard");
 
-        // axios.get('/tasks')
-        // .then((response) => {
-        //     const data = response.data;
-        //     data.map((item) => 
-        //     console.log(item.name)
-        //     );
-        //     setTaskCard(data);
-        //     // console.log(taskCard);
-            
-        // })
-        // .catch(()=>{
-        //     alert("Error")
-        // })
         if(taskList){
             let taskObj = JSON.parse(taskList);
             setTaskCard(taskObj);
@@ -67,12 +53,12 @@ const Main = () => {
         <Myaccount></Myaccount>
         <div  className="header1 text-center">
            {/* <h3>To-Do List</h3> */}
-           <button className="btn btn-dark mt-2"
+           <button className="btn btn-light mt-2"
            onClick = {() => setModal(true)}
            >Add Task  <i className="fas fa-plus mr-auto"></i></button>
           
         </div>
-        <hr style={{"color":"#A0A0A0"}}></hr>
+        <hr style={{"borderColor":"#D3D1D0","width":"75%","margin":"2% auto"}}></hr>
         <div className="taskCards">
             {taskCard && taskCard.map((item,index) => 
             // <TaskCard taskName = {item.name} taskDesc = {item.description} index={item.id}
