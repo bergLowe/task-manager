@@ -1,9 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&display=swap");
 
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.55)),
@@ -15,11 +16,12 @@ body {
 }
 
 .title {
-  font-size: 60px;
+  font-size: 75px;
   color: white;
   font-family: "Playfair Display SC", serif;
   margin: 20px;
   align-self: flex-start;
+  font-weight: 700;
   flex: 1;
 }
 

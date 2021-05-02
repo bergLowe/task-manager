@@ -7,6 +7,10 @@ const Example = (props) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
+  const resetProps = () => {
+    localStorage.removeItem('token');
+  }
+
   return (
     <div>
       <Navbar color="faded" light>
@@ -21,7 +25,7 @@ const Example = (props) => {
               <NavLink href="/components/" style={{"color":"white","fontSize":"1.2em"}}>Name</NavLink>
             </NavItem> */}
             <NavItem>
-              <Link to="./" style={{"color":"white","fontSize":"1.2em"}}>Logout</Link>
+              <Link to="./" onClick={resetProps} style={{"color":"white","fontSize":"1.2em"}}>Logout</Link>
             </NavItem>
           </Nav>
         </Collapse>

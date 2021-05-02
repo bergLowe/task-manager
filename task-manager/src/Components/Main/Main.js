@@ -53,7 +53,7 @@ const Main = () => {
         <Myaccount></Myaccount>
         <div  className="header1 text-center">
            {/* <h3>To-Do List</h3> */}
-           <button className="btn btn-light mt-2"
+           <button className="btn btn-light btn-lg mt-2"
            onClick = {() => setModal(true)}
            >Add Task  <i className="fas fa-plus mr-auto"></i></button>
           
