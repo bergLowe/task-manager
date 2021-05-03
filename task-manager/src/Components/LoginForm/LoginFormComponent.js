@@ -1,24 +1,34 @@
 import React from 'react';
 import './LoginFormComponent.css'
-import { Form, FormGroup, Label, Input, Row, Col, Button, CardTitle } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Row, Col, Button, CardTitle, FormText, FormFeedback } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import GetName from '../GetName';
 
-
 class LoginForm extends React.Component {
+
     constructor(props) {
         super(props);
 
+        this.state = {
+            formError: false,
+            userInfo: {}
+        };
+        
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    name = '';
+    // name = '';
     handleChange(event) {
-        this.setState({
-            [event.target.id]: event.target.value
+        this.setState(prevState => {
+            return {
+                formError: false,
+                userInfo: {
+                    ...prevState.userInfo,
+                    [event.target.id]: event.target.value
+                }
+            }
         });
     }
-
 
     redirectToMain = () => {
         const { history } = this.props;
@@ -27,39 +37,49 @@ class LoginForm extends React.Component {
 
     async onSubmit(e) {
         e.preventDefault();
-        let res = {};
-        await (async () => {
-            const rawResponse = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users/login', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email: this.state.email, password: this.state.password })
-            });
-            const content = await rawResponse.json();
-            console.log("res:");
-            res = content;
-            alert("You have registred succesfully!");
-            this.name=this.state.name;
+
+        const user = await this.getValue();
+        if (user) {
+            localStorage.setItem('token', user.token);
+            // console.log(user.user._id)
+            localStorage.setItem('_id', user.user._id);
             this.redirectToMain();
-        })();
-        await (async () => {
-            const rawResponse = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users/me', {
-                method: 'GET',
-                headers: new Headers({
-                    'Authorization': `Bearer ${res.token}`
-                })
-                // body: JSON.stringify({ email: this.state.email, password: this.state.password })
-            });
-            const content = await rawResponse.json();
-            res = content;
-           
-        })();
-        
-        console.log(res);
+        }
     }
 
+    getValue = async () => {
+        var content = undefined;
+        await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.state.userInfo.email, password: this.state.userInfo.password })
+        }).then(res => {
+            if (res.status === 200) {
+                content = res.json();
+            } else {
+                this.setState(prevState => {
+                    return {
+                        ...prevState,
+                        formError: true
+                    }
+                })
+            }
+        }).catch(err => {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    formError: true
+                }
+            })
+        });
+        // content = await rawResponse.json();
+        // alert("You have logged in succesfully!");
+        // this.name = this.state.name;
+        return content;
+    }
 
     render() {
         return (
@@ -79,7 +99,8 @@ class LoginForm extends React.Component {
                             <Input type="password" id="password" required onChange={this.handleChange}></Input>
                         </FormGroup>
                         <Button type="submit" className="bg-primary btn-lg">Login</Button>
-                        <GetName name = {this.name}></GetName>
+                        {this.state.formError ? <small className="form-text form__error">You have entered an invalid email or password!</small> : null}
+                        {/* <GetName name = {this.name}></GetName> */}
                     </Form>
                 </Col>
             </Row>

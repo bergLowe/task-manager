@@ -2,3 +2,13 @@
     font-size: 20px;
     font-weight: 500;
 }
+
+.form__error {
+    font-size: 16px;
+    background-color: #ff4d5e;
+    border: 1px solid #ff4d5e;
+    color: white;
+    padding: 3px;
+    border-radius: 7px;
+    margin-top: 10px;
+}
