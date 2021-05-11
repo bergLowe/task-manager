@@ -13,35 +13,48 @@ const Main = () => {
     const createTaskCard = (task) => {
         let task_ = taskCard;
         task_.push(task);
-        localStorage.setItem("taskCard",JSON.stringify(task_));    
+        // localStorage.setItem("taskCard",JSON.stringify(task_));    
         setTaskCard(task_);
         setModal(false);
     }
-
+    
     const updateArray = (object, index) => {
         let temp = taskCard;
         temp[index] = object;
-        localStorage.setItem("taskCard",JSON.stringify(temp))
+        // localStorage.setItem("taskCard",JSON.stringify(temp))
         setTaskCard(temp);
+        alert(object.id);
         window.location.reload();
     }
     const deleteTask = (index) => {
         let temp = taskCard;
         temp.splice(index,1);
-        localStorage.setItem("taskCard",JSON.stringify(temp));
+        // localStorage.setItem("taskCard",JSON.stringify(temp));
         setTaskCard(temp);
         console.log(taskCard);
         window.location.reload();
     }
     
+    async function getTask() {
+        var content = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+        var post = await content.json();
+        setTaskCard(post);
+        console.log(post);
+    }
 
     useEffect(() => {
-        let taskList = localStorage.getItem("taskCard");
+        // let taskList = localStorage.getItem("taskCard");
 
-        if(taskList){
-            let taskObj = JSON.parse(taskList);
-            setTaskCard(taskObj);
-        }
+        // if(taskList){
+        //     let taskObj = JSON.parse(taskList);
+        //     setTaskCard(taskObj);
+        // }
+        getTask();
         return () => {
             
         }

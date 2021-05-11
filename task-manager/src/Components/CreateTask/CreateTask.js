@@ -1,17 +1,38 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState} from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const CreateTask = ({modal,toggle,task}) => {
     const [newTask, setNewTask] = useState('');
     const [newDesc, setNewDesc] = useState('');
 
-    const createTask = (e) => {
-        e.preventDefault()
+    // const createTask = (e) => {
+    //     e.preventDefault()
+    //     let taskInfo = {};
+    //     taskInfo["Name"] = newTask;
+    //     taskInfo["Description"] = newDesc;
+    //     task(taskInfo);
+    // }
+    async function postTask () {
+        let task_ = {
+            title:newTask,
+            description: newDesc
+        }
         let taskInfo = {};
-        taskInfo["Name"] = newTask;
-        taskInfo["Description"] = newDesc;
+        taskInfo["title"] = task_.title;
+        taskInfo["description"] = task_.description;
         task(taskInfo);
+        var content = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(task_)
+        });
+        var post = await content.json();
+        console.log(post)
     }
 
     const getValue = (e) => {
@@ -46,7 +67,7 @@ const CreateTask = ({modal,toggle,task}) => {
                 </form>
                 </ModalBody>
                 <ModalFooter>
-                <Button color="primary" onClick={createTask} >Add Task</Button>{' '}
+                <Button color="primary" onClick={postTask} >Add Task</Button>{' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>

@@ -37,7 +37,7 @@ class RegisterForm extends React.Component {
             const content = await rawResponse.json();
             res = content;
             alert("You have registred succesfully!");
-            this.redirectToMain();
+            // this.redirectToMain();
         })();
         await (async () => {
             const rawResponse = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users/me', {

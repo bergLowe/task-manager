@@ -25,8 +25,8 @@ const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
                 <span className = "card-header" 
                 style={{"backgroundColor": "white", "borderRadius": "10px", 
                 "border":"1px solid black"}}
-                >{taskObj.Name}</span>
-                <p className = "mt-3">{taskObj.Description}</p>
+                >{taskObj.title}</span>
+                <p className = "mt-3">{taskObj.description}</p>
 
                 <div style={{"position": "absolute", "right" : "20px", "top" : "20px"}}>
                     {/* <i className = "far fa-edit mr-3" style={{"color" : "black", "cursor" : "pointer"}} ></i> */}

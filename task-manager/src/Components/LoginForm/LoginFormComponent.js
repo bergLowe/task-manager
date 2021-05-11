@@ -1,8 +1,8 @@
 import React from 'react';
 import './LoginFormComponent.css'
-import { Form, FormGroup, Label, Input, Row, Col, Button, CardTitle, FormText, FormFeedback } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Row, Col, Button, CardTitle } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import GetName from '../GetName';
+// import GetName from '../GetName';
 
 class LoginForm extends React.Component {
 

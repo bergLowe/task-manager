@@ -9,9 +9,11 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
     const handleEdit = (e) => {
         e.preventDefault();
         let temp = {};
-        temp['Name'] = newTask;
-        temp['Description'] = newDesc;
+        temp['title'] = newTask;
+        temp['description'] = newDesc;
+        console.log(temp.id);
         editTask(temp);
+        
     }
 
     const getValue = (e) => {
@@ -25,8 +27,9 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
     }
 
     useEffect(() => {
-        setNewTask(newTask);
-        setNewDesc(newDesc);
+        setNewTask(taskObj.name);
+        setNewDesc(taskObj.description);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
