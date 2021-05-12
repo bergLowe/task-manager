@@ -1,0 +1,14 @@
+.todoLogo {
+    font-size: 45px;
+}
+
+.todoTitle {
+    margin-left: 10px;
+    font-size: 40px;
+    cursor: default;
+}
+
+.profileLogo {
+    cursor: pointer;
+    font-size: 40px;
+}

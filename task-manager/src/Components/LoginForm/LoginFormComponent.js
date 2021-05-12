@@ -42,7 +42,7 @@ class LoginForm extends React.Component {
         if (user) {
             localStorage.setItem('token', user.token);
             // console.log(user.user._id);
-            localStorage.setItem('_id', user.user._id);
+            // localStorage.setItem('_id', user.user._id);
             this.redirectToMain();
         }
     }
@@ -55,7 +55,10 @@ class LoginForm extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email: this.state.userInfo.email, password: this.state.userInfo.password })
+            body: JSON.stringify({ 
+                email: this.state.userInfo.email, 
+                password: this.state.userInfo.password 
+            })
         }).then(res => {
             if (res.status === 200) {
                 content = res.json();
