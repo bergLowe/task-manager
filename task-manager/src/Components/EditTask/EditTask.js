@@ -8,12 +8,14 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
 
     const handleEdit = (e) => {
         e.preventDefault();
-        let temp = {};
-        temp['title'] = newTask;
-        temp['description'] = newDesc;
-        console.log(temp.id);
-        editTask(temp);
-        
+        // let temp = {};
+        // temp['title'] = newTask;
+        // temp['description'] = newDesc;
+        // console.log("id: "+temp._id);
+        taskObj.title=newTask;
+        taskObj.description=newDesc;
+        editTask(taskObj);
+        patchTask(taskObj._id) 
     }
 
     const getValue = (e) => {
@@ -26,8 +28,22 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
         }
     }
 
+    async function patchTask (id) {
+        var content = await fetch(`https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({title:newTask,description: newDesc})
+        });
+        var post = await content.json();
+        console.log("edit: "+post);
+    }
+
     useEffect(() => {
-        setNewTask(taskObj.name);
+        setNewTask(taskObj.title);
         setNewDesc(taskObj.description);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -48,7 +64,7 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
                     <div className="form-group">
                         <label for="desc">Task Description</label>
                         <textarea id="desc" rows="5" className="form-control"
-                         name="description"
+                        name="description"
                         value={newDesc}
                         onChange={getValue}></textarea>
                     </div>

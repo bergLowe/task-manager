@@ -18,10 +18,6 @@ const CreateTask = ({modal,toggle,task}) => {
             title:newTask,
             description: newDesc
         }
-        let taskInfo = {};
-        taskInfo["title"] = task_.title;
-        taskInfo["description"] = task_.description;
-        task(taskInfo);
         var content = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks', {
             method: 'POST',
             headers: {
@@ -32,7 +28,8 @@ const CreateTask = ({modal,toggle,task}) => {
             body: JSON.stringify(task_)
         });
         var post = await content.json();
-        console.log(post)
+        task(post);
+        //console.log(post);
     }
 
     const getValue = (e) => {
@@ -54,14 +51,14 @@ const CreateTask = ({modal,toggle,task}) => {
                         <label htmlFor="tname">Task Name</label>
                         <input type="text" id="tname" className="form-control" 
                         name="taskName"
-                        // value={newTask}
+                        value={newTask}
                         onChange={getValue}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="desc">Task Description</label>
                         <textarea id="desc" rows="5" className="form-control"
                          name="description"
-                        // value={newDesc}
+                        value={newDesc}
                         onChange={getValue}></textarea>
                     </div>
                 </form>

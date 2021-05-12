@@ -12,27 +12,23 @@ const Main = () => {
 
     const createTaskCard = (task) => {
         let task_ = taskCard;
-        task_.push(task);
-        // localStorage.setItem("taskCard",JSON.stringify(task_));    
+        task_.push(task);  
         setTaskCard(task_);
+        console.log("Task_ ="+task_);
         setModal(false);
     }
     
     const updateArray = (object, index) => {
         let temp = taskCard;
         temp[index] = object;
-        // localStorage.setItem("taskCard",JSON.stringify(temp))
         setTaskCard(temp);
-        alert(object.id);
-        window.location.reload();
+        setModal(false);
     }
-    const deleteTask = (index) => {
+    const deleteTask = (object,index) => {
         let temp = taskCard;
         temp.splice(index,1);
-        // localStorage.setItem("taskCard",JSON.stringify(temp));
         setTaskCard(temp);
-        console.log(taskCard);
-        window.location.reload();
+        removeTask(object._id);
     }
     
     async function getTask() {
@@ -44,20 +40,33 @@ const Main = () => {
         });
         var post = await content.json();
         setTaskCard(post);
-        console.log(post);
+        //console.log(post);
+        //console.log("taskCard ---->"+ taskCard);
+
+        // Object.entries(taskCard).forEach(
+        //     ([key, value]) => console.log(key, value)
+        // );
+    }
+
+
+    async function removeTask (id) {
+        var content = await fetch(`https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+        var post = await content.json();
+        console.log(post.title);
+        window.location.reload(true)
     }
 
     useEffect(() => {
-        // let taskList = localStorage.getItem("taskCard");
-
-        // if(taskList){
-        //     let taskObj = JSON.parse(taskList);
-        //     setTaskCard(taskObj);
-        // }
         getTask();
         return () => {
             
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const toggle = () => setModal(!modal);
@@ -65,7 +74,6 @@ const Main = () => {
         <>
         <Myaccount></Myaccount>
         <div  className="header1 text-center">
-           {/* <h3>To-Do List</h3> */}
            <button className="btn btn-light btn-lg mt-2"
            onClick = {() => setModal(true)}
            >Add Task  <i className="fas fa-plus mr-auto"></i></button>
@@ -73,11 +81,12 @@ const Main = () => {
         </div>
         <hr style={{"borderColor":"#D3D1D0","width":"75%","margin":"2% auto"}}></hr>
         <div className="taskCards">
-            {taskCard && taskCard.map((item,index) => 
-            // <TaskCard taskName = {item.name} taskDesc = {item.description} index={item.id}
-            <TaskCard taskObj = {item} index={index}
-            deleteTask = {deleteTask}
-            updateArray = {updateArray}/>)
+            {taskCard &&  taskCard.map((item,index) =>
+             <TaskCard taskObj = {item} index={index}
+             deleteTask = {deleteTask}
+             updateArray = {updateArray}
+             toggle = {toggle} 
+             modal = {modal}/> )
             }
         </div>
         <CreateTask toggle = {toggle} modal = {modal} task = {createTaskCard}></CreateTask>

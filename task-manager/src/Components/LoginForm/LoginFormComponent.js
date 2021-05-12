@@ -2,7 +2,6 @@ import React from 'react';
 import './LoginFormComponent.css'
 import { Form, FormGroup, Label, Input, Row, Col, Button, CardTitle } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-// import GetName from '../GetName';
 
 class LoginForm extends React.Component {
 
@@ -33,6 +32,7 @@ class LoginForm extends React.Component {
     redirectToMain = () => {
         const { history } = this.props;
         if(history) history.push('/create-task');
+
     }
 
     async onSubmit(e) {
@@ -41,7 +41,7 @@ class LoginForm extends React.Component {
         const user = await this.getValue();
         if (user) {
             localStorage.setItem('token', user.token);
-            // console.log(user.user._id)
+            // console.log(user.user._id);
             localStorage.setItem('_id', user.user._id);
             this.redirectToMain();
         }
@@ -84,7 +84,6 @@ class LoginForm extends React.Component {
     render() {
         return (
             <Row style={{"margin":"6% auto","width":'50%'}}>
-                {/* <Col></Col> */}
                 <Col className="card" style={{padding: 20}}>
                     <CardTitle><h1 className="text-primary">Login</h1></CardTitle>
                     <Form onSubmit={this.onSubmit}>
