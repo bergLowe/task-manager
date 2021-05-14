@@ -6,13 +6,30 @@ class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            formError: {
+                formError: false,
+                formErrorMsg: ''
+            },
+            userInfo: {}
+        }
+
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
-        this.setState({
-            [event.target.id]: event.target.value
+        this.setState(prevState => {
+            return {
+                formError: {
+                    formError: false,
+                    formErrorMsg: ''
+                },
+                userInfo: {
+                    ...prevState.userInfo,
+                    [event.target.id]: event.target.value
+                }
+            }
         });
     }
 
@@ -21,37 +38,88 @@ class RegisterForm extends React.Component {
         if(history) history.push('/create-task');
     }
 
+    validateForm = async () => {
+        if (this.state.userInfo.password.toLowerCase().includes('password')) {
+            await this.setState(prevState => {
+                return {
+                    ...prevState,
+                    formError: {
+                        formError: true,
+                        formErrorMsg: 'Password cannot contain word "password"!'
+                    }
+                }
+            })
+        }
+    }
+
     async onSubmit(e) {
         e.preventDefault();
         e.preventDefault();
-        let res = {};
-        await (async () => {
-            const rawResponse = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name: this.state.name , email: this.state.email, password: this.state.password, age: this.state.age })
-            });
-            const content = await rawResponse.json();
-            res = content;
-            alert("You have registred succesfully!");
-            this.redirectToMain();
-        })();
-        await (async () => {
-            const rawResponse = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users/me', {
-                method: 'GET',
-                headers: new Headers({
-                    'Authorization': `Bearer ${res.token}`
-                })
-                // body: JSON.stringify({ email: this.state.email, password: this.state.password })
-            });
-            const content = await rawResponse.json();
-            res = content;
+        var content;
+        await this.validateForm();
+        if (!(this.state.formError.formError)) {
+            await (async () => {
+                await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        name: this.state.userInfo.name, 
+                        email: this.state.userInfo.email, 
+                        password: this.state.userInfo.password, 
+                        age: this.state.userInfo.age 
+                    })
+                }).then(async (res) => {
+                    // console.log(res.json())
+                    if (res.status === 201) {
+                        content = await res.json();
+                    } else {
+                        this.setState(prevState => {
+                            return {
+                                ...prevState,
+                                formError: {
+                                    formError: true,
+                                    formErrorMsg: 'Email address may already exist or something else. Please Check Again!'
+                                }
+                            }
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    this.setState(prevState => {
+                        return {
+                            ...prevState,
+                            formError: {
+                                formError: true,
+                                formErrorMsg: `There's some issue. Please Try Again!`
+                            }
+                        }
+                    })
+                });
+                // const content = await rawResponse.json();
+                // alert("You have registred succesfully!");
+                // console.log(content)
+            })();
+            if (content) {
+                localStorage.setItem("token", content.token);
+                this.redirectToMain();
+            }
+        }
+        // await (async () => {
+        //     const rawResponse = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users/me', {
+        //         method: 'GET',
+        //         headers: new Headers({
+        //             'Authorization': `Bearer ${res.token}`
+        //         })
+        //         // body: JSON.stringify({ email: this.state.email, password: this.state.password })
+        //     });
+        //     const content = await rawResponse.json();
+        //     res = content;
            
-        })();
-        console.log(res);
+        // })();
+        // console.log(res);
     }
 
     render() {
@@ -73,13 +141,14 @@ class RegisterForm extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <Label for="password" className="label">Password</Label>
-                            <Input type="password" id="password" required onChange={this.handleChange}></Input>
+                            <Input type="password" id="password" minLength="7" required onChange={this.handleChange}></Input>
                         </FormGroup>
                         <FormGroup>
                             <Label for="age" className="label">Age</Label>
                             <Input type="number" id="age" min='0' onChange={this.handleChange}></Input>
                         </FormGroup>
                         <Button className="btn-lg" style={{backgroundColor: '#F85797'}}>Register</Button>
+                        {this.state.formError.formError ? <small className="form-text form__error">{ this.state.formError.formErrorMsg }</small> : null}
                     </Form>
                 </Col>
             </Row>

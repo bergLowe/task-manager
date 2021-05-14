@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import './Myaccount.css';
 
 
 const Example = (props) => {
@@ -16,9 +16,9 @@ const Example = (props) => {
   return (
     <div>
       <Navbar color="faded" light>
-        <i className="fas fa-tasks fa-fw fa-2x text-white" style={{"verticalAlign": "middle"}}></i>
-        <NavbarBrand href="/" className="mr-auto text-white"><strong>To-Do List</strong></NavbarBrand>
-        <i className="fas fa-user-circle fa-2x mr-2 text-white" onClick={toggleNavbar}></i>
+        <i className="fas fa-tasks fa-fw fa-2x text-white todoLogo" style={{"verticalAlign": "middle"}}></i>
+        <NavbarBrand /*href="/"*/ className="mr-auto text-white todoTitle"><strong>To-Do List</strong></NavbarBrand>
+        <i className="fas fa-user-circle fa-2x mr-2 text-white profileLogo" onClick={toggleNavbar}></i>
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             {/* <NavItem>
