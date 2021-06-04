@@ -2,6 +2,8 @@ import React from 'react';
 import {useState} from 'react';
 import EditTask from '../EditTask/EditTask';
 import { Checkbox } from '@material-ui/core';
+import { Card,CardBody } from 'reactstrap';
+
 
 const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
 
@@ -51,7 +53,7 @@ const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
         <div className = "card-wrapper mr-5">
             <div className = "task-holder">
                 <span className = "card-header" 
-                style={{"backgroundColor": "white", "borderRadius": "10px", 
+                style={{"backgroundColor": "white", "borderRadius": "3px", 
                 "border":"1px solid black"}}
                 >{taskObj.title}</span>
                 {taskObj.completed ? (
@@ -59,16 +61,17 @@ const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
                 ) : (
                     <span></span>
                 )}
-                <p className = "mt-3">{taskObj.description}</p>
+                <Card className = "mt-3" style={{backgroundColor: 'inherit',border:'0'}}>
+                    <CardBody>{taskObj.description}</CardBody>
+                </Card>
+                {/* <p className = "mt-3">{taskObj.description}</p> */}
 
                 <div style={{"position": "absolute", "right" : "20px", "top" : "20px"}}>
                     <i className="fas fa-trash-alt text-white" style = {{"color" : "black", "cursor" : "pointer"}}
                     onClick={handleDelete} ></i>
                 </div>
 
-
-                <div style={{"position": "absolute", "bottom" : "20px"}}>
-                    {/* <input type="checkbox" onChange={changeValue} checked={complete}></input> */}
+                <div style={{"position": "absolute", "right" : "50px", "top" : "12px"}}>
                     <Checkbox onChange={changeValue} checked={complete}
                     style ={{ color: 'white'}}></Checkbox>
                     <button type="button" className="btn btn-outline-light btn-sm" onClick={completeStatus} 
@@ -78,6 +81,16 @@ const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
                         <span>Completed</span>
                     )}</button>
                 </div>
+                {/* <div style={{"position": "absolute", "bottom" : "20px"}}>
+                    <Checkbox onChange={changeValue} checked={complete}
+                    style ={{ color: 'white'}}></Checkbox>
+                    <button type="button" className="btn btn-outline-light btn-sm" onClick={completeStatus} 
+                    >{taskObj.completed ? (
+                        <span>Incomplete</span>
+                    ) : (
+                        <span>Completed</span>
+                    )}</button>
+                </div> */}
 
                 <div style={{"position": "absolute", "right" : "20px", "bottom" : "20px"}}>
                     <button type="button" className="btn btn-outline-light btn-sm" 

@@ -40,6 +40,7 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
         });
         var post = await content.json();
         console.log("edit: "+post);
+        window.location.reload(true);
     }
 
     useEffect(() => {
