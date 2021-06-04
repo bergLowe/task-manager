@@ -59,7 +59,7 @@ class RegisterForm extends React.Component {
         await this.validateForm();
         if (!(this.state.formError.formError)) {
             await (async () => {
-                await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users', {
+                await fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -87,7 +87,7 @@ class RegisterForm extends React.Component {
                         })
                     }
                 }).catch(err => {
-                    console.log(err)
+                    // console.log(err)
                     this.setState(prevState => {
                         return {
                             ...prevState,
@@ -108,7 +108,7 @@ class RegisterForm extends React.Component {
             }
         }
         // await (async () => {
-        //     const rawResponse = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users/me', {
+        //     const rawResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/me`, {
         //         method: 'GET',
         //         headers: new Headers({
         //             'Authorization': `Bearer ${res.token}`

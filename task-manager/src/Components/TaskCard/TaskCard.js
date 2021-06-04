@@ -3,6 +3,7 @@ import {useState} from 'react';
 import EditTask from '../EditTask/EditTask';
 import { Checkbox } from '@material-ui/core';
 import { Card,CardBody } from 'reactstrap';
+import './TaskCard.css';
 
 
 const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
@@ -35,7 +36,7 @@ const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
     }
 
     async function patchTask (id) {
-        var content = await fetch(`https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks/${id}`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks/${id}`, {
             method: 'PATCH',
             headers: {
                 'Accept': 'application/json',
@@ -43,26 +44,29 @@ const TaskCard = ({taskObj,index,deleteTask,updateArray}) => {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             },
             body: JSON.stringify({completed:complete})
-        });
-        var post = await content.json();
-        console.log("edit: "+post);
-        window.location.reload(true)
+        }).then(res => {
+            if (res.status === 200) {
+                window.location.reload(true);
+            }
+        }).catch(err => console.error(err));
+        // var post = await content.json();
+        // console.log("edit: "+post);
     }
 
     return (
         <div className = "card-wrapper mr-5">
             <div className = "task-holder">
-                <span className = "card-header" 
+                <p className = "card-header" 
                 style={{"backgroundColor": "white", "borderRadius": "3px", 
-                "border":"1px solid black"}}
-                >{taskObj.title}</span>
+                "border":"1px solid white"}}
+                >{taskObj.title}</p>
                 {taskObj.completed ? (
-                    <span>Task is Completed!</span>
+                    <span className="istask_complete">Task is Completed!</span>
                 ) : (
                     <span></span>
                 )}
                 <Card className = "mt-3" style={{backgroundColor: 'inherit',border:'0'}}>
-                    <CardBody>{taskObj.description}</CardBody>
+                    <CardBody className="card-body-desc">{taskObj.description}</CardBody>
                 </Card>
                 {/* <p className = "mt-3">{taskObj.description}</p> */}
 

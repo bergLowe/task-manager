@@ -9,8 +9,19 @@ const Example = (props) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  const resetProps = () => {
-    localStorage.removeItem('token');
+  const resetProps = async () => {	
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/logout`, {	
+      method: 'POST',	
+      headers: {	
+          'Accept': 'application/json',	
+          'Content-Type': 'application/json',	
+          'Authorization': `Bearer ${localStorage.getItem("token")}`	
+      }	
+    }).then(res => {	
+        if (res.status === 200) {	
+          localStorage.removeItem('token');
+        }	
+    }).catch(err => console.error(err));
   }
 
   return (

@@ -14,7 +14,7 @@ const Main = () => {
         let task_ = taskCard;
         task_.push(task);  
         setTaskCard(task_);
-        console.log("Task_ ="+task_);
+        // console.log("Task_ ="+task_);
         setModal(false);
     }
     
@@ -32,7 +32,7 @@ const Main = () => {
     }
     
     async function getTask() {
-        var content = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks', {
+        var content = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -50,15 +50,18 @@ const Main = () => {
 
 
     async function removeTask (id) {
-        var content = await fetch(`https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks/${id}`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
+        }).then((res) => {
+            if (res.status === 200) {
+                window.location.reload(true)
+            }
         });
-        var post = await content.json();
-        console.log(post.title);
-        window.location.reload(true)
+        // var post = await content.json();
+        // console.log(post.title);
     }
 
     useEffect(() => {
@@ -83,6 +86,7 @@ const Main = () => {
         <div className="taskCards">
             {taskCard &&  taskCard.map((item,index) =>
              <TaskCard taskObj = {item} index={index}
+             key = {item._id}
              deleteTask = {deleteTask}
              updateArray = {updateArray}
              toggle = {toggle} 

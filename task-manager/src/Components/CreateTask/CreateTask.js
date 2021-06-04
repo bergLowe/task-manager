@@ -18,7 +18,7 @@ const CreateTask = ({modal,toggle,task}) => {
             title:newTask,
             description: newDesc
         }
-        var content = await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks', {
+        var content = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

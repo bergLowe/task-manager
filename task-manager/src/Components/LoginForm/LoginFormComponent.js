@@ -32,7 +32,6 @@ class LoginForm extends React.Component {
     redirectToMain = () => {
         const { history } = this.props;
         if(history) history.push('/create-task');
-
     }
 
     async onSubmit(e) {
@@ -49,7 +48,7 @@ class LoginForm extends React.Component {
 
     getValue = async () => {
         var content = undefined;
-        await fetch('https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/users/login', {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

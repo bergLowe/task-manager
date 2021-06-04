@@ -12,7 +12,7 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
         // temp['title'] = newTask;
         // temp['description'] = newDesc;
         // console.log("id: "+temp._id);
-        taskObj.title=newTask;
+        taskObj.title= newTask.trim()[0].toUpperCase() + newTask.slice(1).toLowerCase();
         taskObj.description=newDesc;
         editTask(taskObj);
         patchTask(taskObj._id) 
@@ -29,7 +29,7 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
     }
 
     async function patchTask (id) {
-        var content = await fetch(`https://darthremus-cors.herokuapp.com/https://berglowe-task-app.herokuapp.com/tasks/${id}`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/tasks/${id}`, {
             method: 'PATCH',
             headers: {
                 'Accept': 'application/json',
@@ -37,10 +37,14 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             },
             body: JSON.stringify({title:newTask,description: newDesc})
+        }).then((res) => {	
+            if (res.status === 200) {	
+                toggle();	
+            };
         });
-        var post = await content.json();
-        console.log("edit: "+post);
-        window.location.reload(true);
+        // var post = await content.json();
+        // console.log("edit: "+post);
+        // window.location.reload(true);
     }
 
     useEffect(() => {
@@ -56,14 +60,14 @@ const EditTask = ({modal,toggle,editTask,taskObj}) => {
                 <ModalBody>
                 <form>
                     <div className="form-group">
-                        <label for="tname">Task Name</label>
+                        <label htmlFor="tname">Task Name</label>
                         <input type="text" id="tname" className="form-control" 
                         name="taskName"
                         value={newTask}
                         onChange={getValue}/>
                     </div>
                     <div className="form-group">
-                        <label for="desc">Task Description</label>
+                        <label htmlFor="desc">Task Description</label>
                         <textarea id="desc" rows="5" className="form-control"
                         name="description"
                         value={newDesc}
