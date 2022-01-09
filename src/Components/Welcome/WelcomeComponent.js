@@ -1,5 +1,5 @@
 import React from 'react';
-import './WelcomeComponent.css';
+// import './WelcomeComponent.css';
 import { Row, Col, Container, ButtonGroup } from 'reactstrap';
 import LoginForm from '../LoginForm/LoginFormComponent';
 import RegisterForm from '../RegisterForm/RegisterFormComponent';

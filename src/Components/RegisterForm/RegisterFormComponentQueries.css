@@ -1,0 +1,35 @@
+@media screen and (min-width: 741px) {
+    #signup_section_body .logo_img {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    #signup_section_body .image_section {
+        display: none;
+    }
+
+    #signup_section_body .logo_img {
+        display: block;
+        height: 8em;
+        width: 8em;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (max-height: 650px) {
+    #signup_section_body .qoute_div {
+        display: none;
+    }
+
+    #signup_section_body .vertical_line {
+        display: none;
+    }
+
+    #signup_section_body .horizontal_line {
+        display: none;
+    }
+}

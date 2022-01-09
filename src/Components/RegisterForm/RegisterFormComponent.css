@@ -1,0 +1,239 @@
+#signup_section_body {
+    display: flex;
+}
+
+/*********************************/
+/******* SIGNUP SECTION **********/
+/*********************************/
+
+.signup_section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+/******** UPPER PART ********/
+
+#signup_section_body .upper_part {
+    flex: 1;
+}
+
+#signup_section_body .welcome_text {
+    font-family: 'Roboto', sans-serif;
+    color: #29282F;
+    font-weight: 700;
+    font-size: 3.125em;
+    margin-bottom: 0.2em;
+    text-align: center;
+}
+
+#signup_section_body .small_text {
+    font-family: 'Shippori Antique B1', sans-serif;
+    color: #ABB8C5;
+    font-size: 1em;
+}
+
+#signup_section_body #ask_login_text {
+    margin-top: 0.875em;
+}
+
+#signup_section_body .small_text button {
+    border: none;
+    color: #1F28EB;
+    cursor: pointer;
+    background-color: white;
+    font-size: 1em;
+    font-family: 'Shippori Antique B1', sans-serif;
+}
+
+/******** LOWER PART ********/
+
+#signup_section_body .lower_part {
+    flex: 3;
+}
+
+#signup_section_body .lower_part fieldset {
+    margin-bottom: 1.3em;
+    border-radius: 0.26em;
+    border: 0.13em solid #E5E5EE;
+    padding: 0.75em;
+}
+
+#signup_section_body .lower_part fieldset:focus-within {
+    border-color: #495ADB;
+}
+
+#signup_section_body .lower_part fieldset:focus-within > legend {
+    color: #495ADB;
+}
+
+#signup_section_body .lower_part legend {
+    font-family: 'Shippori Antique B1', sans-serif;
+    font-size: 0.9em;
+    padding: 0 0.53em;
+    color: #ABB8C5;
+}
+
+#signup_section_body .lower_part input {
+    border: none;
+    font-family: 'Shippori Antique B1', sans-serif;
+    font-size: 1em;
+    width: 100%;
+    padding: 0.13em;
+    color: #29282F;
+}
+
+#signup_section_body .lower_part input::placeholder {
+    color: #ABB8C5;
+}
+
+#signup_section_body .lower_part input:focus {
+    outline: none;
+}
+
+#signup_section_body .lower_part [type=password] {
+    background-image: url("./img/lock-solid.svg");
+    background-position: calc(100% - 0.5em) center;
+    background-repeat: no-repeat;
+    background-size: 1em;
+}
+
+#signup_section_body .lower_part [type=password]:not(:placeholder-shown) {
+    background-image: none;
+}
+
+#signup_section_body .lower_part [type=email] {
+    background-image: url("./img/at-solid.svg");
+    background-position: calc(100% - 0.5em) center;
+    background-repeat: no-repeat;
+    background-size: 1.12em;
+}
+
+#signup_section_body .lower_part [type=email]:not(:placeholder-shown) {
+    background-image: none;
+}
+
+#signup_section_body .lower_part [type=text] {
+    background-image: url("./img/font-solid.svg");
+    background-position: calc(100% - 0.5em) center;
+    background-repeat: no-repeat;
+    background-size: 1.12em;
+}
+
+#signup_section_body .lower_part [type=text]:not(:placeholder-shown) {
+    background-image: none;
+}
+
+#signup_section_body .lower_part button {
+    background-color: #1F28EB;
+    color: #EDF0F7;
+    width: 100%;
+    padding: 1em;
+    font-family: 'Shippori Antique B1', sans-serif;
+    font-size: 1em;
+    border: none;
+    border-radius: 0.3em;
+}
+
+#signup_section_body .lower_part button:focus {
+    outline: none;
+}
+
+/*********************************/
+/******** IMAGE SECTION **********/
+/*********************************/
+
+#signup_section_body .image_section {
+    background-color: #1F28EB;
+    height: 100vh;
+    width: 100vw;
+    flex: 1;
+    position: relative;
+}
+
+#signup_section_body .inverted_comma_div {
+    height: 3.75em;
+    width: 3.75em;
+    background: #92F8E0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 13%;
+    margin-left: 16%;
+}
+
+#signup_section_body .inverted_comma {
+    color: #1F28EB;
+    font-size: 3.125em;
+    margin-top: 0.3em;
+}
+
+#signup_section_body .content_div {
+    margin-top: 3%;
+    margin-left: 18%;
+    color: #EDF0F7;
+    position: absolute;
+}
+
+#signup_section_body .content_title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 5em;
+    /* width: 100%; */
+}
+
+#signup_section_body .qoute_div {
+    font-family:  'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.5;
+    width: 50%;
+    color: #EDF0F7;
+    
+    position: absolute;
+    left: 35%;
+    top: 57%;
+    /* margin-top: 5%;
+    margin-left: 20%; */
+}
+
+#signup_section_body .qoute_author_div {
+    margin-top: 5%;
+}
+
+#signup_section_body .qoute_author {
+    font-weight: 700;
+}
+
+#signup_section_body .qoute_author_des {
+    font-weight: 300;
+}
+
+#signup_section_body .vertical_line {
+    border-left: 1px solid rgba(237, 240, 247, 0.6);
+    height: 25em;
+    position: absolute;
+    left: 20%;
+    top: 25%
+}
+
+#signup_section_body .horizontal_line {
+    border-top: 1px solid rgba(237, 240, 247, 0.6);
+    width: 10%;
+    position: absolute;
+    left: 20%;
+    top: 58.5%;
+}
+
+#signup_section_body .author_img {
+    width: 2.813em;
+    height: 3.125em;
+    position: absolute;
+    border-radius: 50%;
+}
+
+#signup_section_body .author_info {
+    margin-left: 3.125em;
+}

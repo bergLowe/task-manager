@@ -1,6 +1,6 @@
 import React from 'react';
 import './LoginFormComponent.css'
-import { Form, FormGroup, Label, Input, Row, Col, Button, CardTitle } from 'reactstrap';
+// import { Form, FormGroup, Label, Input, Row, Col, Button, CardTitle } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 
 class LoginForm extends React.Component {
@@ -85,26 +85,43 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <Row style={{"margin":"6% auto","width":'50%'}}>
-                <Col className="card" style={{padding: 20}}>
-                    <CardTitle><h1 className="text-primary">Login</h1></CardTitle>
-                    <Form onSubmit={this.onSubmit}>
-                        <FormGroup>
-                            <Label for="email" className="label">Email</Label>
-                            <Input type="email" id="email" required
-                            placeholder="Enter your email id..." 
-                            onChange={this.handleChange}></Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="password" className="label">Password</Label>
-                            <Input type="password" id="password" required onChange={this.handleChange}></Input>
-                        </FormGroup>
-                        <Button type="submit" className="bg-primary btn-lg">Login</Button>
-                        {this.state.formError ? <small className="form-text form__error">You have entered an invalid email or password!</small> : null}
-                        {/* <GetName name = {this.name}></GetName> */}
-                    </Form>
-                </Col>
-            </Row>
+            <section id='login_form_section_body'>
+                <section class="login_form_section">
+                    <img class="logo_img" src={process.env.PUBLIC_URL + '/img/logo.png'} alt="Task Manager Logo" />
+                    <div class="login_form_div">
+                        <h1 class="welcome_back_text">Welcome Back</h1>
+                        <p class="enter_cred_text">Enter your credentials to access your account.</p>
+                        <form>
+                            <input type="email" placeholder="Enter your email" />
+                            <input type="password" placeholder="Enter your password" />
+                            <button type="submit">Sign In</button>
+                        </form>
+                    </div>
+                    <p id="ask_signup_text" class="small_text">Don't have an account? <button>Sign Up</button></p>
+                </section>
+            </section>
+
+
+            // <Row style={{"margin":"6% auto","width":'50%'}}>
+            //     <Col className="card" style={{padding: 20}}>
+            //         <CardTitle><h1 className="text-primary">Login</h1></CardTitle>
+            //         <Form onSubmit={this.onSubmit}>
+            //             <FormGroup>
+            //                 <Label for="email" className="label">Email</Label>
+            //                 <Input type="email" id="email" required
+            //                 placeholder="Enter your email id..." 
+            //                 onChange={this.handleChange}></Input>
+            //             </FormGroup>
+            //             <FormGroup>
+            //                 <Label for="password" className="label">Password</Label>
+            //                 <Input type="password" id="password" required onChange={this.handleChange}></Input>
+            //             </FormGroup>
+            //             <Button type="submit" className="bg-primary btn-lg">Login</Button>
+            //             {this.state.formError ? <small className="form-text form__error">You have entered an invalid email or password!</small> : null}
+            //             {/* <GetName name = {this.name}></GetName> */}
+            //         </Form>
+            //     </Col>
+            // </Row>
         );
     }
 }
