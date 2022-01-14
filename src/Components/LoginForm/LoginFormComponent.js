@@ -15,6 +15,7 @@ class LoginForm extends React.Component {
         
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        // this.formErrorDetected = this.formErrorDetected.bind(this);
     }
     // name = '';
     handleChange(event) {
@@ -34,10 +35,20 @@ class LoginForm extends React.Component {
         if(history) history.push('/create-task');
     }
 
+    redirectToCreateAcc = () => {
+        const { history } = this.props;
+        if (history) history.push('/');
+    }
+
     async onSubmit(e) {
         e.preventDefault();
 
         const user = await this.getValue();
+
+        if (this.state.formError) {
+
+        }
+
         if (user) {
             localStorage.setItem('token', user.token);
             // console.log(user.user._id);
@@ -83,21 +94,26 @@ class LoginForm extends React.Component {
         return content;
     }
 
+    formErrorDetected() {
+        return (<small className="form_error">Invalid Email or Password!</small>);
+    }
+
     render() {
         return (
             <section id='login_form_section_body'>
-                <section class="login_form_section">
-                    <img class="logo_img" src={process.env.PUBLIC_URL + '/img/logo.png'} alt="Task Manager Logo" />
-                    <div class="login_form_div">
-                        <h1 class="welcome_back_text">Welcome Back</h1>
-                        <p class="enter_cred_text">Enter your credentials to access your account.</p>
-                        <form>
-                            <input type="email" placeholder="Enter your email" />
-                            <input type="password" placeholder="Enter your password" />
+                <section className="login_form_section">
+                    <img className="logo_img" src={process.env.PUBLIC_URL + '/img/logo.png'} alt="Task Manager Logo" />
+                    <div className="login_form_div">
+                        <h1 className="welcome_back_text">Welcome Back</h1>
+                        <p className="enter_cred_text">Enter your credentials to access your account.</p>
+                        <form onSubmit={this.onSubmit}>
+                            <input type="email" className={this.state.formError ? 'not-valid' : 'valid'} placeholder="Enter your email" onChange={this.handleChange} required />
+                            <input type="password" className={this.state.formError ? 'not-valid' : 'valid'} placeholder="Enter your password" onChange={this.handleChange} required />
                             <button type="submit">Sign In</button>
                         </form>
+                        {this.state.formError ? this.formErrorDetected() : null}
                     </div>
-                    <p id="ask_signup_text" class="small_text">Don't have an account? <button>Sign Up</button></p>
+                    <p id="ask_signup_text" className="small_text">Don't have an account? <button onClick={this.redirectToCreateAcc}>Sign Up</button></p>
                 </section>
             </section>
 

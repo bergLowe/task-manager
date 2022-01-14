@@ -1,17 +1,7 @@
 /* .label {
     font-size: 20px;
     font-weight: 500;
-}
-
-.form__error {
-    font-size: 16px;
-    background-color: #ff4d5e;
-    border: 1px solid #ff4d5e;
-    color: white;
-    padding: 3px;
-    border-radius: 7px;
-    margin-top: 10px;
-} */
+}*/
 
 #login_form_section_body {
     background-color: #E6EEFF;
@@ -64,13 +54,13 @@
 #login_form_section_body .login_form_div input {
     width: 100%;
     display: block;
-    border: 1px solid #E6EEFF;
     border-radius: 5px;
     padding: 1em;
     margin-bottom: 0.8em;
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
     color: #324567;
+    outline: none;
 
     background-position: 5% center;
     background-repeat: no-repeat;
@@ -78,8 +68,12 @@
     padding-left: calc(1.5em + 10%);
 }
 
-#login_form_section_body .login_form_div input:focus {
-    outline: none;
+#login_form_section_body .valid {
+    border: 1px solid #E6EEFF;
+}
+
+#login_form_section_body .not-valid {
+    border: 2px solid #FF4D5E;
 }
 
 #login_form_section_body input::placeholder {
@@ -93,6 +87,12 @@
 
 #login_form_section_body .login_form_div [type=password] {
     background-image: url("./img/lock-solid.svg");
+}
+
+#login_form_section_body .login_form_div input:-webkit-autofill {
+    background-color: transparent !important;
+    box-shadow: 0 0 0 2em white inset;
+    padding-left: 1em;
 }
 
 #login_form_section_body .login_form_div button {
@@ -120,4 +120,21 @@
     color: #2662FF;
     cursor: pointer;
     font-family: 'Nunito', sans-serif;
+}
+
+#login_form_section_body .form_error {
+    font-size: 0.8em;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    background-color: #FF4D5E;
+    border: 1px solid #FF4D5E;
+    color: white;
+    padding: 0.3em;
+    border-radius: 5px;
+
+    display: block;
+    width: fit-content;
+    margin-top: 0.2em;
+    margin-left: auto;
+    margin-right: auto;
 }

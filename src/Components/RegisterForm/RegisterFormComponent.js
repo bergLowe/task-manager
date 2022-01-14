@@ -41,6 +41,11 @@ class RegisterForm extends React.Component {
         if(history) history.push('/create-task');
     }
 
+    redirectToLogin = () => {
+        const { history } = this.props;
+        if (history) history.push('/login');
+    }
+
     validateForm = async () => {
         if (this.state.userInfo.password.toLowerCase().includes('password')) {
             await this.setState(prevState => {
@@ -58,6 +63,7 @@ class RegisterForm extends React.Component {
     async onSubmit(e) {
         e.preventDefault();
         e.preventDefault();
+        this.redirectToMain();
         var content;
         await this.validateForm();
         if (!(this.state.formError.formError)) {
@@ -128,56 +134,56 @@ class RegisterForm extends React.Component {
     render() {
         return (
             <section id='signup_section_body'>
-                <section class="signup_section">
-                    <div class="upper_part">
-                        <p id="ask_login_text" class="small_text">Already have an account? <button>Sign In</button></p>
+                <section className="signup_section">
+                    <div className="upper_part">
+                        <p id="ask_login_text" className="small_text">Already have an account? <button onClick={this.redirectToLogin}>Sign In</button></p>
                     </div>
 
-                    <div class="lower_part">
-                        <img class="logo_img" src={process.env.PUBLIC_URL + '/img/logo.png'} alt='Task Manager Logo' />
-                        <h1 class="welcome_text">Welcome to Task Manager</h1>
-                        <form>
+                    <div className="lower_part">
+                        <img className="logo_img" src={process.env.PUBLIC_URL + '/img/logo.png'} alt='Task Manager Logo' />
+                        <h1 className="welcome_text">Welcome to Task Manager</h1>
+                        <form onSubmit={this.onSubmit}>
                             <fieldset>
                                 <legend>Name</legend>
                                 {/* <!-- <label for="name">Name</label> --> */}
-                                <input type="text" id="name" placeholder="Your name" required />
+                                <input type="text" id="name" placeholder="Your name" onChange={this.handleChange} required />
                             </fieldset>
 
                             <fieldset>
                                 <legend>E-mail</legend>
                                 {/* <!-- <label for="email">E-mail</label> --> */}
-                                <input type="email" id="email" placeholder="Email address" required />
+                                <input type="email" id="email" placeholder="Email address" onChange={this.handleChange} required />
                             </fieldset>
 
                             <fieldset>
                                 <legend>Password</legend>
                                 {/* <!-- <label for="password">Password</label> --> */}
-                                <input type="password" id="password" minlength="7" placeholder="Password" required />
+                                <input type="password" id="password" minLength={7} placeholder="Password" onChange={this.handleChange} required />
                             </fieldset>
                             <button type="submit">Create an account</button>
                         </form>
                     </div>
                 </section>
 
-                <section class="image_section">
-                    <div class="inverted_comma_div">
-                        <span class="inverted_comma">
+                <section className="image_section">
+                    <div className="inverted_comma_div">
+                        <span className="inverted_comma">
                             &#10077;
                         </span>
                     </div>
-                    <div class="vertical_line"></div>
-                    <div class="horizontal_line"></div>
-                    <div class="content_div">
-                        <h1 class="content_title">Manage your Tasks.</h1>
+                    <div className="vertical_line"></div>
+                    <div className="horizontal_line"></div>
+                    <div className="content_div">
+                        <h1 className="content_title">Manage your Tasks.</h1>
                     </div>
-                    <div class="qoute_div">
-                        <q class="qoute">Productivity is never an accident. It is always the result of a commitment to
+                    <div className="qoute_div">
+                        <q className="qoute">Productivity is never an accident. It is always the result of a commitment to
                             excellence, intelligent planning, and focused effort.</q>
-                        <div class="qoute_author_div">
-                            <img src={paulimg} class="author_img" alt='Paul J. Meyer' />
-                            <div class="author_info">
-                                <p class="qoute_author">Paul J. Meyer</p>
-                                <p class="qoute_author_des">Author</p>
+                        <div className="qoute_author_div">
+                            <img src={paulimg} className="author_img" alt='Paul J. Meyer' />
+                            <div className="author_info">
+                                <p className="qoute_author">Paul J. Meyer</p>
+                                <p className="qoute_author_des">Author</p>
                             </div>
                         </div>
                     </div>
