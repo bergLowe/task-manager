@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import EditTask from '../EditTask/EditTask';
-import { Checkbox } from '@material-ui/core';
+import { Checkbox } from '@mui/material';
 import { Card,CardBody } from 'reactstrap';
 import './TaskCard.css';
 

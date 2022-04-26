@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
                 formError: false,
                 userInfo: {
                     ...prevState.userInfo,
-                    [event.target.id]: event.target.value
+                    [event.target.type]: event.target.value
                 }
             }
         });
@@ -59,6 +59,7 @@ class LoginForm extends React.Component {
 
     getValue = async () => {
         var content = undefined;
+        console.log(this.state.userInfo);
         await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/login`, {
             method: 'POST',
             headers: {

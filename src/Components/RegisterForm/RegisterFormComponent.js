@@ -3,7 +3,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import './RegisterFormComponent.css';
 import './RegisterFormComponentQueries.css';
-import paulimg from './img/paulj.jpg';
+import paulImage from './img/paulj.jpg';
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -62,8 +62,8 @@ class RegisterForm extends React.Component {
 
     async onSubmit(e) {
         e.preventDefault();
-        e.preventDefault();
-        this.redirectToMain();
+
+        // this.redirectToMain();
         var content;
         await this.validateForm();
         if (!(this.state.formError.formError)) {
@@ -71,14 +71,12 @@ class RegisterForm extends React.Component {
                 await fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
                     method: 'POST',
                     headers: {
-                        'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ 
                         name: this.state.userInfo.name, 
                         email: this.state.userInfo.email, 
-                        password: this.state.userInfo.password, 
-                        age: this.state.userInfo.age 
+                        password: this.state.userInfo.password
                     })
                 }).then(async (res) => {
                     // console.log(res.json())
@@ -180,7 +178,7 @@ class RegisterForm extends React.Component {
                         <q className="qoute">Productivity is never an accident. It is always the result of a commitment to
                             excellence, intelligent planning, and focused effort.</q>
                         <div className="qoute_author_div">
-                            <img src={paulimg} className="author_img" alt='Paul J. Meyer' />
+                            <img src={paulImage} className="author_img" alt='Paul J. Meyer' />
                             <div className="author_info">
                                 <p className="qoute_author">Paul J. Meyer</p>
                                 <p className="qoute_author_des">Author</p>
