@@ -69,4 +69,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 <hr>
-<img src="https://github.com/bergLowe/readme-images/blob/main/task-manager/Screenshot-351.png" alt="Website Screenshot">
+<img src="https://drive.google.com/uc?export=view&id=1KS9iWHv6bRTYZwMU7YbzUL5ySHZ7I6LZ" alt="Website Screenshot">
